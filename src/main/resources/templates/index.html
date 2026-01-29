@@ -9,7 +9,8 @@
 <!--[if IE 9]>
 <html class="ie9" lang="ru">
 <![endif]-->
-<!--[if gt IE 9]><!--> <html lang="ru"> <!--<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml"> <!--<![endif]-->
 <head>
   <title>Site Search Engine</title>
   <meta name="description" content="Site Search Engine">
@@ -31,7 +32,7 @@
   <script>
      var backendApiUrl = 'api'
   </script>
-  
+
   <script defer src="/assets/js/scripts.js?v=38874865"></script>
 
 </head>
@@ -107,7 +108,7 @@
                   </button>
                 </div><br>
                 <div class="UpdatePageBlock">
-                  <h3>Add/update page:
+                  <h3>Add/update page's Lemmas:
                   </h3>
                   <form class="form form_close" action="#" method="post" data-send="indexPage">
                     <div class="form-group form-group_row">
@@ -125,12 +126,16 @@
                   <h2 class="Section-title">Search
                   </h2>
                 </div>
-                <form class="form form_close" action="#" method="post" data-send="search" data-sendlimit="10">
+                <form class="form form_close" th:action="@{/search}" method="get" data-send="search" data-sendoffset="1" data-sendlimit="200">
                   <div class="form-group">
                     <div class="form-selectWrap">
                       <!-- - var options = setOptions(items, ['value', 'selected', 'disabled']);-->
                       <select class="form-select" name="site">
                         <option value="" selected="selected">All sites
+                        </option>
+                        <option th:each="site : ${sites}"
+                                th:value="${site}"
+                                th:text="${site}">
                         </option>
                       </select>
                     </div>
@@ -142,9 +147,18 @@
                   </div>
                 </form>
                 <div class="SearchResult">
-                  <strong class="SearchResult-title">Found&#32;<span class="SearchResult-amount">0</span>&#32;results
+<!--                  <strong class="SearchResult-title">Found&#32;<span class="SearchResult-amount">0</span>&#32;results-->
+<!--                  </strong>-->
+                  <strong class="SearchResult-title">
+                    Found <span class="SearchResult-amount" th:text="${resultCount}">0</span> results
                   </strong>
                   <div class="SearchResult-content">
+<!--                    <div th:each="result : ${results}">-->
+<!--                      <p th:text="${result.title}">Result Title</p>-->
+<!--                    </div>-->
+<!--                    <div th:each="entry : ${results}">-->
+<!--                      <p th:text="${entry.key} + ' - ' + ${entry.value}"></p>-->
+<!--                    </div>-->
                   </div>
                   <div class="SearchResult-footer SearchResult-footer_hide">
                     <button class="btn btn_primary" data-send="search" data-sendtype="next">Show more<span class="SearchResult-remain">(0)</span>

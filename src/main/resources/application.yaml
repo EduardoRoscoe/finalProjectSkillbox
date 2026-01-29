@@ -1,10 +1,52 @@
 # example values
-
 indexing-settings:
   sites:
-    - url: https://www.lenta.ru
-      name: Лента.ру
-    - url: https://www.skillbox.ru
+#    - -url: asdjfhalhhahf
+#      name: ;asdhfa;
+#      - url: https://www.lenta.ru/
+#        name: Лента.ру
+    - url: https://sendel.ru/
+      name: Sendel
+    - url: https://www.skillbox.ru/
       name: Skillbox
-    - url: https://www.playback.ru
+    - url: https://volochek.life/
+      name: Volocheck.life
+    - url: https://www.playback.ru/
       name: PlayBack.Ru
+#    - url: https://radiomv.ru/
+#      name: RadioMV
+#      radio MV security certificate is not accepted by Java
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: CaraChato
+    url: jdbc:mysql://localhost:3306/search_engine?useSSL=false&requireSSL=false&allowPublicKeyRetrieval=true
+    hikari:
+      maximum-pool-size: 25
+      connection-timeout: 30000 # 30 seconds
+      idle-timeout: 600000      # 10 minutes
+      max-lifetime: 3600000     # 60 minutes
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+    drop-first: false
+
+logging:
+  level:
+    root:
+    searchengine.services:
+
+#    com.zaxxer.hikari: DEBUG
+

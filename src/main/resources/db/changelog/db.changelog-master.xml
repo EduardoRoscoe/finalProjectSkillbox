@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+<!--    <changeSet id="create-index-path" author="eduardo">-->
+<!--        <createIndex indexName="idx_path" tableName="page" unique="true">-->
+<!--            <column name="path" type="varchar(255)" />-->
+<!--        </createIndex>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="create-index-path" author="eduardo">-->
+<!--        <createIndex indexName="idx_path" tableName="page">-->
+<!--            <column name="path" prefixLength="255"/>-->
+<!--        </createIndex>-->
+<!--    </changeSet>-->
+<!--    <changeSet id="1" author="your_name">-->
+<!--        <sql>ALTER TABLE page ADD UNIQUE INDEX unique_path (path(255));</sql>-->
+<!--    </changeSet>-->
+    <changeSet id="create-index-path" author="eduardo" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="page"/>
+        </preConditions>
+        <sql>ALTER TABLE page ADD INDEX index_path (path(255));-- trigger runOnChange</sql>
+    </changeSet>
+<!--    <changeSet id="create-index-path" author="eduardo" runOnChange="true">-->
+<!--        <createIndex indexName="idx_path" tableName="page">-->
+<!--            <column name="path" length="100"/>-->
+<!--        </createIndex>-->
+<!--    </changeSet>-->
+
+
+</databaseChangeLog>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+<h1>Results for "<span th:text="${query}"></span>"</h1>
+
+<p th:if="${#lists.isEmpty(results)}">No results found.</p>
+
+<ul th:if="${!#lists.isEmpty(results)}">
+    <li th:each="r : ${results}" th:text="${r.title}"></li>
+</ul>
+
+<a href="/">Back to search</a>
+</body>
+</html>
